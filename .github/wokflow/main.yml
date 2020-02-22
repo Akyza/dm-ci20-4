@@ -1,0 +1,17 @@
+name: dmCI
+
+on: push
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: installation de commposer
+        run:  composer install
+      - name: Lancement des tests unitaires
+        run: bin/phpunit tests/Unit
+      - name: Lancement des tests d'intégrations
+        run: bin/phpunit tests/Integration
+      - name: Lancement des tests fonctionnels
+        run: php vendor/bin/behat
